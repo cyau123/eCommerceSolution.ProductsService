@@ -1,0 +1,46 @@
+# Rider / IntelliJ IDEA project settings
+.idea/
+*.iml
+
+# Rider-specific workspace files
+/shelf/
+/workspace.xml
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/httpRequests/
+
+# Datasource local storage
+/dataSources/
+/dataSources.local.xml
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+out/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+*.nuspec
+*.psmdcp
+packages/
+
+# Others
+*.log
+*.vs/
+.vscode/
+
+# Dotnet user secrets (if used)
+**/secrets.json
+
+# Resharper files (if using)
+_ReSharper*/
+*.DotSettings.user
+
