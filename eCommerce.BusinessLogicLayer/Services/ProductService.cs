@@ -33,14 +33,14 @@ public class ProductService : IProductsService
 
     public async Task<List<ProductResponse?>> GetProductsByCondition(Expression<Func<Product, bool>> conditionExpression)
     {
-        var products = _productsRepository.GetProductsByCondition(conditionExpression);
+        var products = await _productsRepository.GetProductsByCondition(conditionExpression);
         var productResponses = _mapper.Map<IEnumerable<ProductResponse?>>(products);
         return productResponses.ToList();
     }
 
     public async Task<ProductResponse?> GetProductByCondition(Expression<Func<Product, bool>> conditionExpression)
     {
-        var product = _productsRepository.GetProductByCondition(conditionExpression);
+        var product = await _productsRepository.GetProductByCondition(conditionExpression);
         
         if (product == null)
         {
