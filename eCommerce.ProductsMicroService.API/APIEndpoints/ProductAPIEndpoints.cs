@@ -20,6 +20,11 @@ public static class ProductAPIEndpoints
             async (IProductsService productService, Guid ProductID) =>
             {
                 var product = await productService.GetProductByCondition(p => p.ProductID == ProductID);
+                if (product == null)
+                {
+                    return Results.NotFound();
+                }
+                
                 return Results.Ok(product);
             });
         
