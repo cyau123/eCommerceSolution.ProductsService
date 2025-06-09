@@ -1,6 +1,0 @@
-﻿services:
-  productsmicroservice.api:
-    image: productsmicroservice.api
-    build:
-      context: .
-      dockerfile: ProductsMicroService.API/Dockerfile
