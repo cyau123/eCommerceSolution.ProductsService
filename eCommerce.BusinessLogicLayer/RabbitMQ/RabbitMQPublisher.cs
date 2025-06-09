@@ -29,17 +29,22 @@ public class RabbitMQPublisher : IRabbitMQPublisher, IDisposable
         _connection = connectionFactory.CreateConnection();
         _channel = _connection.CreateModel();
     }
-    public void Publish<T>(string routingKey, T message)
+    // public void Publish<T>(string routingKey, T message)
+    public void Publish<T>(Dictionary<string, object> headers, T message)
     {
         string messageJson = JsonSerializer.Serialize(message);
         byte[] messageBodyInBytes = Encoding.UTF8.GetBytes(messageJson);
         
         // Create exchange
         string exchangeName = _configuration["RabbitMQ_Products_Exchange"]!;
-        _channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Direct, durable: true);
+        _channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Headers, durable: true);
         
         // Publish message
-        _channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: messageBodyInBytes);
+        //_channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: messageBodyInBytes);
+        var basicProperties = _channel.CreateBasicProperties();
+        basicProperties.Headers = headers;
+        _channel.BasicPublish(exchange: exchangeName, routingKey: string.Empty, basicProperties: basicProperties, body: messageBodyInBytes);
+
     }
 
     public void Dispose()
